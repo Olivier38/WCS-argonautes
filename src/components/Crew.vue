@@ -1,27 +1,38 @@
 <script setup lang="ts">
 import type { NameInterface } from "@/name.interface";
-import names from "@/data/names";
+import { db } from "@/firebase";
+
+import { collection, addDoc } from "firebase/firestore";
 import { ref } from "vue";
 import CrewList from "./CrewList.vue";
 
-defineProps<{
+const props = defineProps<{
   names: NameInterface[];
 }>();
 const nameText = ref<string>("");
 
 const addName = () => {
-  const newName = {
+  // const newName = {
+  //   name: nameText.value,
+  // };
+  // props.names.push(newName);
+  // proper function //
+  // setDoc(doc(db, "crew", "test"), {
+  //   name: nameText.value,
+  // });
+  addDoc(collection(db, "crew"), {
     name: nameText.value,
-  };
-  names.push(newName);
+  });
   nameText.value = "";
+  console.log(props.names);
 };
+// proper function //
 </script>
 
 <template>
   <div class="full-w d-flex flex-column align-items-center">
     <div class="form-container d-flex align-items-center">
-      <form action="" @submit.prevent="addName">
+      <form action="" @submit.prevent="addName()">
         <input
           placeholder="Ulysse"
           type="text"
@@ -32,7 +43,7 @@ const addName = () => {
       </form>
     </div>
     <div class="container mt-40">
-      <CrewList v-model="names" :nameText="nameText" />
+      <CrewList :names="names" :nameText="nameText" />
     </div>
   </div>
 </template>

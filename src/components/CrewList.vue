@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { NameInterface } from "@/name.interface";
-import names from "@/data/names";
 
 defineProps<{
-  modelValue: NameInterface[];
+  names: NameInterface[];
   nameText: string;
 }>();
 </script>
