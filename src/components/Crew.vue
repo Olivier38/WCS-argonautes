@@ -1,41 +1,75 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { NameInterface } from "@/name.interface";
+import names from "@/data/names";
+import { ref } from "vue";
+import CrewList from "./CrewList.vue";
+
+defineProps<{
+  names: NameInterface[];
+}>();
+const nameText = ref<string>("");
+
+const addName = () => {
+  const newName = {
+    name: nameText.value,
+  };
+  names.push(newName);
+  nameText.value = "";
+};
+</script>
 
 <template>
-  <div class="bg">
-    <h2 class="d-flex justify-content-center pt-30">Membres de l'équipage</h2>
-    <div class="container">
-      <div class="crew-container d-flex align-items-center pt-30">
-        <p>John Doe</p>
-        <p>John Doe</p>
-        <p>John Doe</p>
-        <p>John Doe</p>
-        <p>John Doe</p>
-        <p>John Doe</p>
-        <p>John Doe</p>
-        <p>John Doe</p>
-      </div>
+  <div class="full-w d-flex flex-column align-items-center">
+    <div class="form-container d-flex align-items-center">
+      <form action="" @submit.prevent="addName">
+        <input
+          placeholder="Ulysse"
+          type="text"
+          v-model="nameText"
+          class="mr-30"
+        />
+        <button class="btn" :disabled="!nameText">Envoyer</button>
+      </form>
+    </div>
+    <div class="container mt-40">
+      <CrewList v-model="names" :nameText="nameText" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.crew-container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  grid-auto-rows: 40px;
-  grid-gap: 10px;
-  text-align: center;
+.btn {
+  font: 18px var(--font-family-1) 700;
+  padding: 10px 50px;
+  background-color: #f76c6c;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  &:hover {
+    background-color: #f85959;
+  }
+}
+input {
+  height: 50px;
+  width: 500px;
+  border: 0;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px 0 rgba(32, 33, 36, 0.2);
+}
+
+input::placeholder {
+  font-size: 14px;
+  padding-left: 10px;
+  color: #f76c6c;
 }
 .container {
-  flex-wrap: wrap;
-  justify-content: space-around;
-  display: flex;
-  margin: 0 auto;
-  max-width: 80%;
+  height: 100%;
   width: 100%;
-}
-.bg {
   background-color: var(--gray-1);
+}
+
+.form-container {
+  min-height: 200px;
 }
 </style>

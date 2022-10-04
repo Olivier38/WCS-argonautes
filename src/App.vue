@@ -1,16 +1,19 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import type { NameInterface } from "./name.interface";
 import TheHeader from "./components/Header.vue";
-import CrewForm from "./components/CrewForm.vue";
-import Crew from "./components/Crew.vue";
 import TheFooter from "./components/Footer.vue";
+import data from "./data/names";
+import Crew from "./components/Crew.vue";
+
+const names = ref<NameInterface[]>(data);
 </script>
 
 <template>
   <div class="app-container">
     <TheHeader class="header" />
-    <CrewForm class="crew-form" />
-    <Crew class="crew" />
-    <TheFooter class="footer b4" />
+    <Crew :names="names" class="crew" />
+    <TheFooter class="footer" />
   </div>
 </template>
 
@@ -22,16 +25,14 @@ import TheFooter from "./components/Footer.vue";
   min-height: 100vh;
   min-width: 100%;
   display: grid;
-  grid-template-areas: "header" "crew-form" "crew" "footer";
-  grid-template-rows: 150px 30vh auto 48px;
+  grid-template-areas: "header" "crew" "footer";
+  grid-template-rows: 150px auto 48px;
 }
 
 .header {
   grid-area: header;
 }
-.crew-form {
-  grid-area: crew-form;
-}
+
 .crew {
   grid-area: crew;
 }

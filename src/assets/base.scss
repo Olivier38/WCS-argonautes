@@ -81,6 +81,9 @@ body {
   align-items: flex-end;
 }
 
+.full-w {
+  width: 100%;
+}
 // padding
 .pm-0 {
   padding: 0px;
@@ -105,6 +108,10 @@ body {
 .pt-40 {
   padding-top: 4 0px;
 }
+
+.pb-30 {
+  padding-bottom: 30px;
+}
 // margin
 
 .m-10 {
@@ -121,6 +128,9 @@ body {
 
 .mb-10 {
   margin-bottom: 10px;
+}
+.mb-20 {
+  margin-bottom: 20px;
 }
 
 .mr-10 {
