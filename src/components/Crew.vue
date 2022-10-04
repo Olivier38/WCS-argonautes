@@ -12,21 +12,12 @@ const props = defineProps<{
 const nameText = ref<string>("");
 
 const addName = () => {
-  // const newName = {
-  //   name: nameText.value,
-  // };
-  // props.names.push(newName);
-  // proper function //
-  // setDoc(doc(db, "crew", "test"), {
-  //   name: nameText.value,
-  // });
   addDoc(collection(db, "crew"), {
     name: nameText.value,
   });
   nameText.value = "";
   console.log(props.names);
 };
-// proper function //
 </script>
 
 <template>
