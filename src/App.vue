@@ -4,7 +4,10 @@ import type { NameInterface } from "./name.interface";
 import TheHeader from "./components/Header.vue";
 import TheFooter from "./components/Footer.vue";
 import Crew from "./components/Crew.vue";
+
 import {
+  orderBy,
+  limit,
   collection,
   query,
   where,
@@ -14,16 +17,20 @@ import {
 import { db } from "@/firebase";
 
 const names = ref<NameInterface[]>([]);
+const namesCollectionQuery = query(
+  collection(db, "crew"),
+  orderBy("date", "desc")
+);
 
 onMounted(() => {
   onSnapshot(collection(db, "crew"), (querySnapshot) => {
     let crewNames = reactive([]);
     querySnapshot.forEach((doc) => {
-      const crewName = reactive<NameInterface>({
+      let crewName = reactive({
         id: doc.id,
         name: doc.data().name,
       });
-      crewNames.push(crewName);
+      crewNames.unshift(crewName);
     });
     names.value = crewNames;
   });

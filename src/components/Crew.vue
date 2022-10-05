@@ -14,6 +14,7 @@ const nameText = ref<string>("");
 const addName = () => {
   addDoc(collection(db, "crew"), {
     name: nameText.value,
+    date: Date.now(),
   });
   nameText.value = "";
   console.log(props.names);
