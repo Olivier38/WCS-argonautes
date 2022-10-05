@@ -23,7 +23,7 @@ const namesCollectionQuery = query(
 );
 
 onMounted(() => {
-  onSnapshot(collection(db, "crew"), (querySnapshot) => {
+  onSnapshot(namesCollectionQuery, (querySnapshot) => {
     let crewNames = reactive([]);
     querySnapshot.forEach((doc) => {
       let crewName = reactive({
